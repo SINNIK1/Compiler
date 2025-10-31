@@ -17,7 +17,12 @@ namespace tinyc {
 
     struct NumberExpr : Expr { string value; };
     struct IdentExpr : Expr { string name; };
-    struct BinaryExpr : Expr { unique_ptr<Expr> lhs, rhs; string op; };
+    struct BinaryExpr : Expr { 
+        unique_ptr<Expr> lhs, rhs; 
+        string op; 
+        BinaryExpr( unique_ptr<Expr> l, unique_ptr<Expr> r, string o)
+        : lhs(move(l)), rhs(move(r)), op(move(o)) {}
+    };
 
     struct VarDecl : Stmt { string name; unique_ptr<Expr> init; };
     struct ExprStmt : Stmt { unique_ptr<Expr> expr; };

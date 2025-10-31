@@ -1,8 +1,7 @@
 #pragma once
 #include <string>
-#include <string>
 #include <vector>
-#include "common/diag.h"
+#include "../common/diag.h"
 
 using namespace std;
 
@@ -36,7 +35,7 @@ public:
 private:
     char peek() const;
     char advance();
-    void skipWhateSpace();
+    void skipWhitespace();
     Token makeToken(TokenKind k, const string &lexeme);
     Token lexIdentifier();
     Token lexNumber();

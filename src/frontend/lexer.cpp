@@ -19,7 +19,7 @@ namespace tinyc {
         return c;
     }
 
-    void Lexer::skipWhateSpace() {
+    void Lexer::skipWhitespace() {
         while (isspace(peek())) advance();
     }
 
@@ -33,7 +33,7 @@ namespace tinyc {
         if(id == "let") return makeToken(TokenKind::KwLet, id);
         if(id == "fn") return makeToken(TokenKind::KwFn, id);
         if(id == "return") return makeToken(TokenKind::KwReturn, id);
-        return makeToken(TokenKind::KwLet, id);
+        return makeToken(TokenKind::Identifier, id);
     }
 
     Token Lexer::lexNumber() {
@@ -56,7 +56,7 @@ namespace tinyc {
     vector<Token> Lexer::tokenize() {
         vector<Token> out;
         while(true) {
-            skipWhateSpace();
+            skipWhitespace();
             char c = peek();
             if( c == '\0' ) { out.push_back(makeToken(TokenKind::EndOfFile, "")); break; }
             if(isalpha(c) || c == '_') { out.push_back(lexIdentifier()); continue; }
